@@ -20,7 +20,7 @@ make_GLM <- function(data, count_threshold=5){
 
   # Throw out any genes that don't meet threshold counts per million in all samples
   cpmlimit = count_threshold*min(data$samples$lib.size)*count_threshold/1000000
-  data = data[rowSums(cpm(data)<cpmlimit == 0, , keep.lib.sizes=FALSE]
+  data = data[rowSums(cpm(data)<cpmlimit) == 0, , keep.lib.sizes=FALSE]
 
   # Make a binary design matrix for GLM on the basis of treatment only. 
   design = model.matrix(~data$samples$Treatment, data=data$samples)
